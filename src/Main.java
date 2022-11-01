@@ -3,7 +3,8 @@ public class Main {
         int h = 2;
         int o = 1;
         for (int i = 0; i < 5; i++){
-            System.out.println("Pepe se la re come");
+            System.out.println("Santi se la re come");
+            System.out.println("¡Y quitos tambien!");
         }
 
     }
