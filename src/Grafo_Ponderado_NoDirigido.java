@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BinaryOperator;
 
 public class Grafo_Ponderado_NoDirigido {
     int capacidad;
@@ -119,9 +120,101 @@ public class Grafo_Ponderado_NoDirigido {
                 }
             }
         }
+    }
 
+
+
+    public List<String> fuentes(){
+        List<String> lista = new ArrayList<>();
+
+        for(int i = 0; i<capacidad;i++){
+            boolean fuente = true;
+            for ( int j = 0; j <capacidad;j++){
+                if (matriz_aristas[j][i] != Integer.MAX_VALUE){
+                    fuente = false;
+                    break;
+                }
+            }
+            if (fuente){
+                lista.add(vertices[i]);
+            }
+        }
+        return lista;
+    }
+
+    public List<String> sumideros(){
+        List<String> lista = new ArrayList<>();
+        for (int i = 0; i<capacidad ; i++){
+            boolean sumidero = true;
+            for (int j = 0; j< capacidad;j++){
+                if (matriz_aristas[i][j] != Integer.MAX_VALUE){
+                    sumidero = false;
+                    break;
+                }
+            }
+            if (sumidero){
+                lista.add(vertices[i]);
+            }
+        }
+        return lista;
+    }
+
+
+    public List<String> cercanos(String name){
+        List<String> lista = new ArrayList<>();
+        boolean[] booleanos = new boolean[capacidad];
+        lista.add(name);
+        cercanos(find(name), 0,lista, booleanos);
+        return lista;
+    }
+
+    private void cercanos(int vertice, int recorrido, List<String> list,boolean[] booleanos){
+        if (recorrido > 1){
+            return;
+        }
+        else {
+            for (int i =0; i<capacidad;i++){
+                if (matriz_aristas[vertice][i]!=Integer.MAX_VALUE && !booleanos[i]){
+                    list.add(vertices[i]);
+                    booleanos[i] = true;
+                    cercanos(i,recorrido+1,list,booleanos);
+                }
+            }
+        }
 
     }
+
+
+    public boolean isGraphConexo(){
+        for (int i = 0; i < cantidad_de_vertices; i++) {
+            if (!isVertexConexo(vertices[i]))
+                return false;
+        }
+        return true;
+    }
+
+    public boolean isVertexConexo(String vertex){
+        boolean[] visited = new boolean[cantidad_de_vertices];
+        visited[find(vertex)] = true;
+        checkGraph(listAdy(vertex).get(0), visited);
+        return visitedAll(visited);
+
+    }
+
+    private void checkGraph(String vertex, boolean[] visited){
+        if (!visited[find(vertex)] && !listAdy(vertex).isEmpty()) {
+            visited[find(vertex)] = true;
+            checkGraph(listAdy(vertex).get(0), visited);
+        }
+    }
+
+    private boolean visitedAll(boolean[] visited){
+        for (int i = 0; i < visited.length; i++){
+            if (!visited[0]) return false;
+        }
+        return true;
+    }
+
 
 
 }
