@@ -104,5 +104,24 @@ public class Grafo_Ponderado_NoDirigido {
         return lista;
     }
 
+    public void showGraph(){
+        System.out.println("Vertices:");
+        for (int i =0; i<capacidad;i++){
+            if (vertices[i] != null)System.out.print(vertices[i] + ", ");
+        }
+        System.out.printf("%nAristas:%n");
+        for(int i = 0; i< capacidad;i++){
+            String fila = vertices[i];
+            for (int j = 0 ;j<capacidad;j++){
+                String columna = vertices[j];
+                if (matriz_aristas[i][j] < Integer.MAX_VALUE){
+                    System.out.println(fila+ " -> " + columna + " (" + matriz_aristas[i][j] + ")");
+                }
+            }
+        }
+
+
+    }
+
 
 }

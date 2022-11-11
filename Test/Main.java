@@ -25,7 +25,8 @@ public class Main {
 
         Assert.assertFalse(grafo.existsEdge("Valencia","madrid"));
         Assert.assertTrue(grafo.existsEdge("madrid","Valencia"));
-        grafo.listAdy("madrid").forEach(word-> System.out.println(word));
+//        grafo.listAdy("madrid").forEach(word-> System.out.println(word));
+        grafo.showGraph();
 
 
 
