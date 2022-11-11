@@ -17,7 +17,7 @@ public class Grafo_Ponderado_NoDirigido {
     }
 
     public Grafo_Ponderado_NoDirigido(){
-        this.capacidad = 1;
+        this.capacidad = 10;
         matriz_aristas = new int [capacidad][capacidad];
         fill();
         vertices = new String[capacidad];
@@ -73,8 +73,14 @@ public class Grafo_Ponderado_NoDirigido {
         vertices[position] = null;
         cantidad_de_vertices--;
         for (int i = 0; i < capacidad; i++){
-            matriz_aristas[position][i] = Integer.MAX_VALUE;
-            matriz_aristas[i][position] = Integer.MAX_VALUE;
+            if (matriz_aristas[position][i] != Integer.MAX_VALUE){
+                matriz_aristas[position][i] = Integer.MAX_VALUE;
+                cant_aristas--;
+            }
+            if (matriz_aristas[i][position] != Integer.MAX_VALUE){
+                matriz_aristas[i][position] = Integer.MAX_VALUE;
+                cant_aristas--;
+            }
         }
     }
 
@@ -92,8 +98,8 @@ public class Grafo_Ponderado_NoDirigido {
 
     public List<String > listAdy(String name){
         List<String> lista = new ArrayList<>();
-        for (int i  = 0; i< capacidad && matriz_aristas[find(name)][i] < Integer.MAX_VALUE;i++){
-            lista.add(vertices[i]);
+        for (int i  = 0; i< capacidad ;i++){
+            if(matriz_aristas[find(name)][i] < Integer.MAX_VALUE)lista.add(vertices[i]);
         }
         return lista;
     }
