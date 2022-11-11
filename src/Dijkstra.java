@@ -17,7 +17,7 @@ public class Dijkstra {
             new Graph.Edge("e", "f", 9),
     };
     private static final String START = "a";
-    private static final String END = "e";
+    private static final String END = "w";
 
     /**
      * main function Will run the code with "GRAPH" that was defined above.
