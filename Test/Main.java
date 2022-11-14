@@ -61,5 +61,41 @@ public class Main {
         grafo.addEdge("d","a",2);
         System.out.println(grafo.isGraphConexo());
     }
+
+    @Test
+    public static void test(){
+        int[] a = new int[5];
+        System.out.println(a[2]);
+    }
+
+
+    @Test
+    public static void Dijkstra(){
+        Grafo_Ponderado_NoDirigido grafo = new Grafo_Ponderado_NoDirigido(5);
+        grafo.addVertex("1");
+        grafo.addVertex("2");
+        grafo.addVertex("3");
+        grafo.addVertex("4");
+        grafo.addVertex("5");
+        grafo.addEdge("1","2",10);
+        grafo.addEdge("2","1",10);
+        grafo.addEdge("1","4",30);
+        grafo.addEdge("4","1",30);
+        grafo.addEdge("1","5",100);
+        grafo.addEdge("5","1",100);
+        grafo.addEdge("2","3",50);
+        grafo.addEdge("3","2",50);
+        grafo.addEdge("3","4",20);
+        grafo.addEdge("4","3",20);
+        grafo.addEdge("3","5",10);
+        grafo.addEdge("5","3",10);
+        grafo.addEdge("4","5",60);
+        grafo.addEdge("5","4",60);
+        grafo.dijkstra("1");
+
+
+
+
+    }
 }
 

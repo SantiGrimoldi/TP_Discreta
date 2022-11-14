@@ -29,7 +29,9 @@ public class Grafo_Ponderado_NoDirigido {
     private void fill(){
         for (int i = 0; i< capacidad;i++){
             for (int j = 0; j<capacidad;j++){
-                matriz_aristas[i][j] = Integer.MAX_VALUE;
+                if(i!=j) {
+                    matriz_aristas[i][j] = Integer.MAX_VALUE;
+                }
             }
         }
     }
@@ -213,6 +215,65 @@ public class Grafo_Ponderado_NoDirigido {
             if (!visited[0]) return false;
         }
         return true;
+    }
+
+
+    public void dijkstra(String name){
+        int starting_position = find(name);
+        Integer[] s = new Integer[capacidad];
+        s[0] = starting_position;
+        int[] peso_camino = matriz_aristas[starting_position];
+        int[] vertice_aneterior = new int[capacidad];
+        for (int i = 0; i< vertice_aneterior.length;i++){
+            vertice_aneterior[i] = starting_position;
+        }
+        boolean[] checked = new boolean[capacidad];
+        for (int i = 0; i<capacidad;i++){
+            if(s[i]!=null){
+                checked[s[i]] = true;
+            }
+        }
+        for(int i = 1; i< capacidad ;i++){
+            int min = findmin(starting_position,checked);
+            int road = peso_camino[min];
+            s[i] = min;
+            checked[min] = true;
+            for (int j = 0; j<capacidad;j++){
+                if (!checked[j]){
+                    if(matriz_aristas[min][j] == Integer.MAX_VALUE)continue;
+                     int nuevo_camino = road + matriz_aristas[min][j];
+                     if(nuevo_camino < peso_camino[j]){
+                         peso_camino[j] = nuevo_camino;
+                         vertice_aneterior[j] = min;
+                     }
+                }
+            }
+        }
+        System.out.print("Peso caminos: %n[");
+        for (int i = 0;i<capacidad;i++){
+            System.out.print(peso_camino[i]+", ");
+        }
+        System.out.println("]");
+        System.out.print("Vertice anterior: %n[");
+        for (int i = 0;i<capacidad;i++){
+            System.out.print(vertice_aneterior[i]+", ");
+        }
+        System.out.println("]");
+
+
+
+    }
+
+    private int findmin(int position, boolean[] checked){
+        int min = Integer.MAX_VALUE;
+        int devolver = 0;
+        for (int i = 0; i<capacidad;i++){
+            if (matriz_aristas[position][i]<min && !checked[i]){
+                min = matriz_aristas[position][i];
+                devolver = i;
+            }
+        }
+        return devolver;
     }
 
 
