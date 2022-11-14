@@ -94,8 +94,22 @@ public class Main {
         grafo.dijkstra("1");
 
 
+    }
 
+    @Test
+    public static void parque(){
+        String[][] datos = new String[][]{
+                new String[]{"Entrada","p1","10"},
+                new String[]{"Entrada","p2","5"},
+                new String[]{"Entrada","p3","8"},
+                new String[]{"Entrada","p4","13"},
+                new String[]{"Entrada","p5","9"},
+                new String[]{"p3","p1","1"},
+                new String[]{"p2","p5","1"},
 
+        };
+        Parque_nacional parque_nacional = new Parque_nacional(datos);
+        parque_nacional.printCaminos();
     }
 }
 

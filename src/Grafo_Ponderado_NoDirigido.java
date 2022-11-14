@@ -86,6 +86,9 @@ public class Grafo_Ponderado_NoDirigido {
             }
         }
     }
+    public boolean existsVertex(String a){
+        return find(a)!=-1;
+    }
 
     public boolean existsEdge(String a, String b ){
         return matriz_aristas[find(a)][find(b)] != Integer.MAX_VALUE;
@@ -218,7 +221,7 @@ public class Grafo_Ponderado_NoDirigido {
     }
 
 
-    public void dijkstra(String name){
+    public int[][] dijkstra(String name){
         int starting_position = find(name);
         Integer[] s = new Integer[capacidad];
         s[0] = starting_position;
@@ -249,18 +252,21 @@ public class Grafo_Ponderado_NoDirigido {
                 }
             }
         }
-        System.out.print("Peso caminos: %n[");
-        for (int i = 0;i<capacidad;i++){
-            System.out.print(peso_camino[i]+", ");
-        }
-        System.out.println("]");
-        System.out.print("Vertice anterior: %n[");
-        for (int i = 0;i<capacidad;i++){
-            System.out.print(vertice_aneterior[i]+", ");
-        }
-        System.out.println("]");
+//        System.out.print("Peso caminos: %n[");
+//        for (int i = 0;i<capacidad;i++){
+//            System.out.print(peso_camino[i]+", ");
+//        }
+//        System.out.println("]");
+//        System.out.print("Vertice anterior: %n[");
+//        for (int i = 0;i<capacidad;i++){
+//            System.out.print(vertice_aneterior[i]+", ");
+//        }
+//        System.out.println("]");
 
-
+    return new int[][]{
+      vertice_aneterior,
+      peso_camino
+    };
 
     }
 
